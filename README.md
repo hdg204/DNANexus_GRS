@@ -4,6 +4,8 @@
 
 This repository contains a function to calculate a genetic risk score in the UK Biobank cohort, using the DNA Nexus platform. It contains one function, Calculate_GRS.R, which takes one input, a file with a list of chromosome, base pair, other allele, effect allele, and weight, and returns a data frame with two columns, eid and grs. Please note that it takes about 20 minutes to compile a GRS on the default DNA Nexus settings. Most of this time is spent extracting SNPs from the BGEN files.
 
+If any SNPs are missing, it will just exclude them and not tell you about it. I'm working on it.
+
 ## Example script
 
 This script has been written to run on the RStudio Workbench on DNA Nexus, which at the time of writing runs First, run
