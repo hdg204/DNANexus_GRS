@@ -25,6 +25,8 @@ Where `snp file` is a tab seperated file, which looks like this
 
 ![image](https://user-images.githubusercontent.com/36624710/213706895-55a9471b-b85b-427d-997b-1306911b8c10.png)
 
+See the file `contigrs` as an example.
+
 ## Complete Script
 
 Users on the Exomes_450K Project at the Univeristy of Exeter can run the following example to calculate the Conti et. al. GRS https://pubmed.ncbi.nlm.nih.gov/33398198/ and test its predictive power against Prostate Cancer.
