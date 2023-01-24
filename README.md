@@ -13,7 +13,7 @@ Important notes:
 
 **extract_snp** is not required for Calculate_GRS, but is a potentially useful related function that extracts the genotype information for one SNP in from the imputed data and stores it in a dataframe. The function takes two inputs, chromosome and base pair, and returns a lit with two outputs, one with the genotype data and one with the snp info. The genotype data is a dataframe with two columns, id and genotype. The snp info contains chromosome position rsid number_of_alleles allele0 allele1.
 
-extract_snp can be run, e.g. using `extract_snp(8,128077146)`
+extract_snp can be run, e.g. using `extract_snp(8,128077146)`. It takes about one minute.
 
 ## Example script for Calculate_GRS
 
