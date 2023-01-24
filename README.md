@@ -11,7 +11,7 @@ Important notes:
 * If any SNPs are missing, it will just exclude them and not tell you about it. I'm working on it.
 * SNPs must be entered in chr bp format, and must be in build 37. This is to match the index bgen files stored on the DNA Nexus RAP
 
-**extract_snp** is not required for Calculate_GRS, but is a potentially useful related function that extracts the genotype information for one SNP in from the imputed data and stores it in a dataframe. The function takes two inputs, chromosome and base pair, and returns a lit with two outputs, one with the genotype data and one with the snp info. The genotype data is a dataframe with two columns, id and genotype. The snp info contains chromosome position rsid number_of_alleles allele0 allele1.
+**extract_snp.R** is not required for Calculate_GRS, but is a potentially useful related function that extracts the genotype information for one SNP in from the imputed data and stores it in a dataframe. The function takes two inputs, chromosome and base pair, and returns a lit with two outputs, one with the genotype data and one with the snp info. The genotype data is a dataframe with two columns, id and genotype. The snp info contains chromosome position rsid number_of_alleles allele0 allele1.
 
 extract_snp can be run, e.g. using `extract_snp(8,128077146)`. It takes about one minute and is not recommended for outputting lots of SNPs. The speed for these functions is limited by the speed of `bgen.load`, and a future release will add an extra function to make this process quicker for multiple SNPs.
 
