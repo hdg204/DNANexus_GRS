@@ -35,29 +35,30 @@ This script relies on https://github.com/hdg204/UKBB
 
 ```
 library(devtools) 
-source_url("https://raw.githubusercontent.com/hdg204/UKBB/main/UKBB_Health_Records_Public.R") 
-
 library('dplyr')
 library('ggplot2')
 install.packages( "http://www.well.ox.ac.uk/~gav/resources/rbgen_v1.1.5.tgz", repos = NULL, type = "source" )
 library('rbgen')
 
-prostate_cancer=first_occurence(cancer='C61',ICD10='C61')%>%mutate(prca=1)
+system('dx download file-GP3GfZjJZ8kYP25V5VZ1BGfx') #this file has the conti et al snps in it
+source_url("https://raw.githubusercontent.com/hdg204/DNANexus_GRS/main/Calculate_GRS.R")  #makes Calculate_GRS available
+grs=generate_grs('conti_et_al_prostate_snps') #this uses the downloaded file and makes a grs
 
-system('dx download file-GP3GfZjJZ8kYP25V5VZ1BGfx')
-source_url("https://raw.githubusercontent.com/hdg204/UKBB/main/GRS_and_SNP_extraction.R") 
-grs=generate_grs('conti_et_al_prostate_snps')
+
+
+source_url("https://raw.githubusercontent.com/hdg204/UKBB/main/UKBB_Health_Records_Public.R") # this script is used to derive the Prostate Cancer phenotype
+prostate_cancer=first_occurence(cancer='C61',ICD10='C61')%>%mutate(prca=1) # this uses my own first occurence code
 
 all_data=left_join(grs,prostate_cancer)
-all_data$prca[is.na(all_data$prca)]=0
+all_data$prca[is.na(all_data$prca)]=0 #all_data$prca is now a list of 1s and 0s
 
-
+# plot density plots of the distribution in caes and controls
 ggplot(all_data,aes(x=grs,fill=as.factor(prca),colour=as.factor(prca)))+
 	geom_density(alpha=0.3)
 	
+#build a ROC curve with the AUC
 install.packages('pROC')
 library('pROC')
-	
 logit <- glm(prca~grs, data = all_data, family = "binomial")
 prob = predict(logit, newdata = all_data, type = "response")
 roc(all_data$prca ~ prob, plot = TRUE, print.auc = TRUE, ci=TRUE)
