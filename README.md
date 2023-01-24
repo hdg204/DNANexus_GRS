@@ -2,14 +2,20 @@
 
 ## Description
 
-This repository contains a function to calculate a genetic risk score in the UK Biobank cohort, using the DNA Nexus platform. It contains one function, Calculate_GRS.R, which takes one input, a file with a list of chromosome, base pair, other allele, effect allele, and weight, and returns a data frame with two columns, eid and grs. Please note that it takes about 20 minutes to compile a GRS on the default DNA Nexus settings. Most of this time is spent extracting SNPs from the BGEN files.
+This repository contains two functions:
+
+**Calculate_GRS.R** is a function built to evaluate genetic risk scores in the UK biobank cohort, using the imputed genotypes and RStudio workbench on the DNA Nexus platform. It takes one input, a file with a list of chromosome, base pair, other allele, effect allele, and weight, and returns a data frame with two columns, eid and grs. Please note that it takes about 20 minutes to compile a GRS on the default DNA Nexus settings. Most of this time is spent extracting SNPs from the BGEN files, which is a slow process through R.
 
 Important notes:
 
 * If any SNPs are missing, it will just exclude them and not tell you about it. I'm working on it.
 * SNPs must be entered in chr bp format, and must be in build 37. This is to match the index bgen files stored on the DNA Nexus RAP
 
-## Example script
+**extract_snp** is not required for Calculate_GRS, but is a potentially useful related function that extracts the genotype information for one SNP in from the imputed data and stores it in a dataframe. The function takes two inputs, chromosome and base pair, and returns a lit with two outputs, one with the genotype data and one with the snp info. The genotype data is a dataframe with two columns, id and genotype. The snp info contains chromosome position rsid number_of_alleles allele0 allele1.
+
+extract_snp can be run, e.g. using `extract_snp(8,128077146)`
+
+## Example script for Calculate_GRS
 
 This script has been written to run on the RStudio Workbench on DNA Nexus, which at the time of writing runs First, run
 
